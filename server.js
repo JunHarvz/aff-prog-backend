@@ -15,8 +15,8 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  'https://aff-prog-store.vercel.app/',
-  'https://aff-prog.vercel.app/'
+  'https://aff-prog-store.vercel.app',
+  'https://aff-prog.vercel.app'
 ];
 
 //ExpressJS is responsible for cors and express.json 
@@ -27,7 +27,8 @@ app.use(cors({
     } else {
       callback(new Error('Not allowed by CORS'));
     }
-  }
+  },
+  credentials: true
 }));
 app.use(express.json());
 
