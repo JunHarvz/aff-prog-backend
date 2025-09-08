@@ -11,9 +11,24 @@ import storeRoutes from "./routes/store.js";
 
 dotenv.config();
 const app = express();
+const cors = require("cors");
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://aff-prog-store.vercel.app/',
+  'https://aff-prog.vercel.app/'
+];
 
 //ExpressJS is responsible for cors and express.json 
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 app.use(express.json());
 
 //Routes
